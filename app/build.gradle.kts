@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -66,4 +68,27 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // hilt navigations
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    // more icons
+    implementation("androidx.compose.material:material-icons-extended:1.6.4")
+
+    // dagger hilt
+    implementation("com.google.dagger:hilt-android:2.49")
+    kapt("com.google.dagger:hilt-android-compiler:2.49")
+    kapt("com.google.dagger:dagger-compiler:2.49")
+
+    // database
+    implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+
+//     viewmodel
+//    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+
+
+
+
 }
