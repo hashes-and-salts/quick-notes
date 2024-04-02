@@ -1,7 +1,5 @@
 package com.example.quicknotes.data.note
 
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -19,7 +17,7 @@ data class NoteEntity(
     val dateEdited: Long,
 
     @ColumnInfo(name = "color")
-    val color: String = Color.Transparent.toArgb().toString(),
+    val color: String = "none",
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0

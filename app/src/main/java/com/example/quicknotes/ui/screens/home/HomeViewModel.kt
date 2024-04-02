@@ -13,8 +13,14 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val noteRepository: NoteRepository): ViewModel() {
 
-    val _state = MutableStateFlow<List<NoteEntity>>(emptyList())
+    private val _state = MutableStateFlow<List<NoteEntity>>(emptyList())
     val state = _state.asStateFlow()
+
+    private val _selectedNoteEntity = MutableStateFlow<NoteEntity?>(null)
+    val selectedNoteEntity = _selectedNoteEntity.asStateFlow()
+
+    private val _snackBarErrorMessage = MutableStateFlow<String?>(null)
+    val snackBarErrorMessage = _snackBarErrorMessage.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -22,6 +28,22 @@ class HomeViewModel @Inject constructor(private val noteRepository: NoteReposito
                 _state.value = it
             }
         }
+    }
+
+    fun deleteNote() {
+        try {
+            _selectedNoteEntity.value?.let {
+                viewModelScope.launch {
+                    noteRepository.deleteNote(it)
+                }
+            }
+        } catch (e: Exception) {
+            _snackBarErrorMessage.value = e.localizedMessage
+        }
+    }
+
+    fun updateSelectedNote(noteEntity: NoteEntity) {
+        _selectedNoteEntity.value = noteEntity
     }
 
 

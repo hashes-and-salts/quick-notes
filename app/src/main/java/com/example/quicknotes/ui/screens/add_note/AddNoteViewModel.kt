@@ -1,7 +1,5 @@
 package com.example.quicknotes.ui.screens.add_note
 
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.quicknotes.data.note.NoteEntity
@@ -21,7 +19,7 @@ class AddNoteViewModel @Inject constructor(private val noteRepository: NoteRepos
             title = "",
             content = "",
             dateEdited = System.currentTimeMillis(),
-            color = Color.Transparent.toArgb().toString()
+            color = "none"
         )
     )
     val noteState = _noteState.asStateFlow()
